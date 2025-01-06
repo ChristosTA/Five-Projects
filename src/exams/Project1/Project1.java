@@ -1,5 +1,13 @@
+package exams.Project1;
 import java.io.*;
 import java.util.*;
+
+/**
+ * Είναι μια εφαρμογή που αρχικοποιεί, διαβάζει ένα αρχείο FileIn.txt με έναν scanner.
+ * Έπειτα ελέγχει τις τιμές από το αρχείο αν είναι έγκυρες και τις περνάει σε έναν int πίνακα, όπου γίνεται το sort.
+ * Έχουμε μεθόδους που παίρνουν τους αριθμούς και δημιουργούν κάθε πιθανή εξάδα και αναφέρει πόσες εξάδες φτιαχτήκαν, και τα φίλτρα, όπου μόλις φτιαχτεί η εξάδα περνάει από τα φίλτρα.
+ * Τα αποτελέσματα που περνάνε ως true γράφονται σε ένα αρχείο fileOut.txt και εμφανιζέται ενα μήνυμα στην οθόνη.
+ */
 
 public class Project1 {
 
@@ -29,11 +37,11 @@ public class Project1 {
             Arrays.sort(array, 0, index);
             System.out.println("Ταξινομημένος πίνακας: " + Arrays.toString(Arrays.copyOf(array, index)));
 
-            // Δημιουργία εξάδων
+
             List<int[]> combinations = getCombinations(array, index, 6);
             System.out.println("Σύνολο εξάδων: " + combinations.size());
 
-            // Εφαρμογή φίλτρων και εγγραφή στο αρχείο
+
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("C:\\Users\\xrist\\IdeaProjects\\FiveProjects\\src\\FileOut.txt"))) {
                 applyFiltersAndWrite(combinations, writer);
                 System.out.println("Τα αποτελέσματα των φίλτρων γράφτηκαν στο FileOut.txt");
@@ -48,7 +56,7 @@ public class Project1 {
         }
     }
 
-    // Δημιουργία όλων των συνδυασμών
+
     public static List<int[]> getCombinations(int[] array, int size, int k) {
         List<int[]> combinations = new ArrayList<>();
         int[] combination = new int[k];
@@ -68,7 +76,7 @@ public class Project1 {
         }
     }
 
-    // Εφαρμογή φίλτρων και εγγραφή στο αρχείο
+
     public static void applyFiltersAndWrite(List<int[]> combinations, BufferedWriter writer) throws IOException {
         for (int[] combination : combinations) {
             if (applyFilters(combination, combination.length)) {
@@ -77,7 +85,7 @@ public class Project1 {
         }
     }
 
-    // Μέθοδος για την εφαρμογή φίλτρων
+
     public static boolean applyFilters(int[] array, int size) {
         return checkEvenCount(array, size) &&
                 checkOddCount(array, size) &&
@@ -86,7 +94,7 @@ public class Project1 {
                 checkSameDecade(array, size);
     }
 
-    // Τα φίλτρα όπως ήταν
+
     public static boolean checkEvenCount(int[] array, int size) {
         int evenCount = 0;
         for (int i = 0; i < size; i++) {
